@@ -6,7 +6,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <meta name="description" content="">
  <meta name="author" content="">
- <title>Koperasi Sejahtera Solidaritas Bersama (KSSB)</title>
+ <title>Teras Aloha Coffee Bogor</title>
  <!-- Custom fonts for this template-->
  <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -26,13 +26,13 @@
                             <div class="col-lg-20">
                                 <div class="p-5">
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">Yayasan Dharma Setia Kosgoro<br>Kota Bogor<br>
-                                            <br><img src="{{ asset('asset/img/logo_ubsi.png')}}" width="160"></h1>
+                                            <h1 class="h4 text-gray-900 mb-4">Teras Aloha Coffee Bogor<br>
+                                            <br><img src="{{ asset('asset/img/logo_aloha.png')}}" width="160"></h1>
                                         </div>
                                         <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="form-group row">
-                                            <label for="email" class="col-md-12 col-form-label text-md-left">{{ __('E-Mail Address') }}</label>
+                                            <label for="email" class="col-md-12 col-form-label text-md-left">{{ __('E-mail Address') }}</label>
                                             <div class="col-md-12"> 
                                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus> 
                                                 @error('email')

@@ -2,7 +2,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Invoice PT XYZ</title>
+	<title>Teras Aloha Coffee Bogor</title>
 	<style>
 	.invoice-box {
 		max-width: 800px;
