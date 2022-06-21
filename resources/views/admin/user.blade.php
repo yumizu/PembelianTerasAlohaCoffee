@@ -28,11 +28,15 @@
             <td>{{$row->id}}</td>
             <td>{{$row->name}}</td>
             <td>{{$row->email}}</td>
-            @foreach ($row->roles as $r) 
-                <td>
-                    {{$r->id}}
-                </td> 
-            @endforeach 
+            @if(count($row->roles) == 0)) 
+                <td>-</td>  
+            @else
+                @foreach ($row->roles as $r) 
+                    <td>
+                        {{$r->name}}
+                    </td> 
+                @endforeach 
+            @endif
             <td align="center">
                 <a href="{{route( 'user.edit' ,[$row->id])}}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                     <i class="fas fa-edit fa-sm text-white-50"></i>Edit
