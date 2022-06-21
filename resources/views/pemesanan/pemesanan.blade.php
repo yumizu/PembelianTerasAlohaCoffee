@@ -48,7 +48,7 @@
 @foreach($temp_pemesanan as $temp)
 <tr>
  <td><input name="kd_brg[]" class="form-control" type="hidden" value="{{$temp->kd_brg}}" readonly >{{$temp->kd_brg}}</td>
- <td><input name="nama" class="form-control" type="hidden" value="{{$temp->nm_brg}}" readonly >{{$temp->nm_brg}}</td>
+ <td><input name="nama" class="form-control" type="hidden" value="{{$temp->nm_brg}}" readonly >{{ str_replace(($temp->sub_total / $temp->qty_pesan), '', $temp->nm_brg) }}</td>
  <td><input name="qty_pesan[]" class="form-control" type="hidden" value="{{$temp->qty_pesan}}" readonly>{{$temp->qty_pesan}}</td>
  <td> <input name="sub_total[]" class="form-control" type="hidden" value="{{$temp->sub_total}}" readonly >{{$temp->sub_total}}</td>
  <td align="center">
