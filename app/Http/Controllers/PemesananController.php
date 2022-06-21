@@ -119,8 +119,10 @@ class PemesananController extends Controller
      */
     public function destroy($kd_brg)
     {
-        $barang=\App\Pemesanan_tem::findOrFail($kd_brg);
-        $barang->delete();
+        $barang = \App\Pemesanan_tem::where('kd_brg', $kd_brg);
+        if ($barang) {
+            $barang->delete();
+        }
         Alert::success('Pesan ','Data berhasil dihapus');
         return redirect('transaksi');
     }

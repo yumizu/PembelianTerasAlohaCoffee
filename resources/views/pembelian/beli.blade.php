@@ -1,45 +1,63 @@
-@extends('layouts.layout') 
-@section('content') 
+@extends('layouts.layout')
+@section('content')
 @include('sweetalert::alert')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-	<h1 class="h3 mb-0 text-gray-800">Pembelian </h1> </div>
+	<h1 class="h3 mb-0 text-gray-800">Pembelian </h1>
+</div>
 <hr>
-<form action="/retur/simpan" method="POST"> @csrf
+<form action="/pembelian/simpan" method="POST">
+	@csrf
 	<div class="form-group col-sm-4">
-		<label for="exampleFormControlInput1">No Retur</label> @foreach($kas as $ks)
-		<input type="hidden" name="kas" value="{{ $ks->no_akun }}" class="form-control" id="exampleFormControlInput1"> @endforeach @foreach($retur as $rtr)
-		<input type="hidden" name="retur" value="{{ $rtr->no_akun }}" class="form-control" id="exampleFormControlInput1"> @endforeach
-		<input type="hidden" name="no_jurnal" value="{{ $formatj }}" c lass="form-control" id="exampleFormControlInput1">
-		<input type="text" name="no_retur" value="{{ $format }}" class="form-control" id="exampleFormControlInput1" readonly> </div>
+		<label for="exampleFormControlInput1">No Pembelian</label> @foreach($kas as $ks)
+		<input type="hidden" name="akun" value="{{ $ks->no_akun }}" class="form-control" id="exampleFormControlInput1"> @endforeach
+		@foreach($pembelian as $bli)
+		<input type="hidden" name="pembelian" value="{{ $bli->no_akun }}" class="form-control" id="exampleFormControlInput1">
+		@endforeach
+		<input type="hidden" name="no_jurnal" value="{{ $formatj }}" class="f orm-control" id="exampleFormControlInput1">
+		<input type="text" name="no_faktur" value="{{ $format }}" class="form -control" id="exampleFormControlInput1">
+	</div>
+	@foreach($pemesanan as $psn) <div class="form-group col-sm-4">
+		<label for="exampleFormControlInput1">No Pemesanan</label> <input type="text" name="no_pesan" value="{{ $psn->no_pesan }}" class="form-control" id="exampleFormControlInput1">
+	</div>
 	<div class="form-group col-sm-4">
-		<label for="exampleFormControlInput1">Tanggal Retur</label>
-		<input type="date" min="1" name="tgl" id="addnmbrg" class="form-control" id="exampleFormControlInput1" require> </div>
+		<label for="exampleFormControlInput1">Tanggal Pemesanan</label> <input type="text" min="1" name="tgl" value="{{ $psn->tgl_pesan }}" id="addnmbrg" class="form- control" id="exampleFormControlInput1" require>
+	</div>
+	@endforeach
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered tablestriped" id="dataTable" width="100%" cellspacing="0">
+				<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
 					<thead class="thead-dark">
 						<tr>
 							<th>Kode Barang</th>
 							<th>Nama Barang</th>
-							<th align="center">Jumlah Barang Dibeli</th>
-							<th width=10%>Jumlah Retur</th>
+							<th>Quantity</th>
+							<th>Sub Total</th>
+							<th>Aksi</th>
 						</tr>
 					</thead>
-					<tbody> @php($total = 0) @foreach($beli as $bli)
-						<tr>
-							<td>
-								<input name="kd_brg[]" class="formcontrol" type="hidden" value="{{$bli->kd_brg}}" readonly>{{$bli->kd_brg}}</td>
-							<td>{{$bli->nm_brg}}</td>
+					<tbody>
+						@php($total = 0) @foreach($detail as $temp) <tr>
+							<td><input name="no_beli[]" class="form-control" type="hidden" value="{{$temp->no_pesan}}" readonly><input name="kd_brg[]" class="form-control" type="hidden" value="{{$temp->kd_brg}}" readonly>{{$temp->kd_brg}}</td>
+							<td>{{$temp->nm_brg}}</td>
+							<td><input name="qty_beli[]" class="form-control" type="hidden" value="{{$temp->qty_pesan}}" readonly>{{$temp->qty_pesan}}</td>
+							<td><input name="sub_beli[]" class="form-control" type="hidden" value="{{$temp->sub_total}}" readonly>{{$temp->sub_total}}</td>
 							<td align="center">
-								<input name="qty_beli[]" class="formcontrol" type="hidden" value="{{$bli->qty_beli}}" readonly>
-								<input name="harga[]" class="formcontrol" type="hidden" value="{{$bli->harga}}" readonly> {{$bli->qty_beli}}</td>
-							<td width=10%>
-								<input name="jml_retur[]" class="formcontrol" type="number" value="0">
+								<a href="/transaksi/hapus/{{$temp->kd_brg}}" onclick="return confirm('Yakin Ingin menghapus data?')" class="d- none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+									<i class="fas fa-trash-alt fa-sm text-white-50"></i> Hapus</a>
 							</td>
-						</tr> @endforeach </tbody>
+						</tr>
+						@php($total += $temp->sub_total) @endforeach
+						<tr>
+							<td colspan="3"></td>
+							<td><input name="total" class="form-control" type="hidden" value="{{$total}}">Total {{number_format($total)}}</a>
+							<td></td>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
-			<input type="submit" class="btn btn-primary btnsend" value="Simpan Retur"> </div>
+			<input type="submit" class="btn btn-primary btn-send" value="Simpan Pembelian">
+		</div>
 	</div>
-</form> @endsection
+</form @endsection
