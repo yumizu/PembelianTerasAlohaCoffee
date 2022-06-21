@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-5">
                 <label for="pass">Password</label>
-                <input id="password" type="text" name="password" class="form-control" value="{{$user->password}}">
+                <input id="password" type="password" name="password" class="form-control">
             </div>
             <div class="col-md-5">
                 <label for="pass">Role</label>

@@ -90,6 +90,11 @@ class UserController extends Controller
         $user = User::find($request->id);
         FacadesDB::table('model_has_roles')->where('model_id', $id)->delete();
         $user->assignRole($request->roles);
+        // Change password if the user fill the password field
+        if (isset($request->password)) {
+            $user->password = bcrypt($request->password);
+            $user->save();
+        }
         Alert::success('Update', 'Data Berhasil di Update');
         return redirect()->route('user.index');
     }
