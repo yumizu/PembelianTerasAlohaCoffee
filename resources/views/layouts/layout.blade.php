@@ -28,14 +28,14 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-
+            <br />
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center p-3" href="#">
                 <div class="sidebar-brand-icon rotate-n-0">
-                    <img src="{{asset('asset/img/logo_ubsi.png')}}" width="60">
+                    <img src="{{asset('asset/img/logo_aloha.png')}}" width="100">
                 </div>
-                <div class="sidebar-brand-text mx-2">Pemrograman Akuntansi II</div>
             </a>
+            <div class="sidebar-brand sidebar-brand-text mx-2 p-3">Teras Aloha Coffee Bogor</div>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -126,7 +126,7 @@
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <div class="input-group-append">
-                                <h4>Sistem Informasi Akuntansi PT. xy</h4>
+                                <h4>Teras Aloha Coffee Bogor</h4>
                             </div>
                         </div>
                     </form>
@@ -169,11 +169,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <div class="dropdown-divider"></div>
+                               
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -201,7 +197,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Create By: Jullian <br>Copyright &copy; jul2021</span>
+                        <span>Create By: Intan & Kistina<br>Copyright &copy; Kelompok Mantappu 2022</span>
                     </div>
                 </div>
             </footer>
