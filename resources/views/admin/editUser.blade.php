@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 @include('sweetalert::alert')
-<form action="{{route('user.update', [$user->userid])}}" method="POST">
+<form action="{{route('user.update', [$user->id])}}" method="POST">
     @csrf
     <input type="hidden" name="_method" value="PUT">
     <fieldset>
@@ -9,11 +9,11 @@
         <div class="form-group row">
             <div class="col-md-5">
                 <label for="adduserid">User Id</label>
-                <input class="form-control" type="text" name="addkdbrg" value="{{$user->userid}}" readonly>
+                <input class="form-control" type="text" name="id" value="{{$user->id}}" readonly>
             </div>
             <div class="col-md-5">
                 <label for="addnmuser">Nama</label>
-                <input id="addnmuser" type="text" name="addnmuser" class="form-control" value="{{$user->nm_user}}">
+                <input id="name" type="text" name="name" class="form-control" value="{{$user->name}}">
             </div>
             <div class="col-md-5">
                 <label for="email">Email</label>
@@ -21,7 +21,15 @@
             </div>
             <div class="col-md-5">
                 <label for="pass">Password</label>
-                <input id="pass" type="text" name="pass" class="form-control" value="{{$user->pass}}">
+                <input id="password" type="text" name="password" class="form-control" value="{{$user->password}}">
+            </div>
+            <div class="col-md-5">
+                <label for="pass">Role</label>
+                <select id="roles" name="roles" class="form-control" required>
+                    <option value="">--Pilih Roles--</option>
+                    <option value="1" {{ $user->roles->pluck('id')->first() == 1 ? 'selected' : '' }}>Admin</option>
+                    <option value="2" {{ $user->roles->pluck('id')->first() == 2 ? 'selected' : '' }}>User</option>
+                </select>
             </div>
 
             </fieldset>

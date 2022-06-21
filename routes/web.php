@@ -23,6 +23,7 @@ Route::group(['mildware' => ['role:admin']], function() {
     Route::resource('/user','userController');
     Route::get('/user/hapus/{id}','userController@destroy');
     Route::get('/user/edit/{id}','UserController@edit');
+    Route::post('/user/update','UserController@update')->name('user.update');
     Route::resource('/barang','BarangController')->middleware('role:admin');
     Route::resource('/barang','BarangController');
     Route::get('/barang/hapus/{id}','BarangController@destroy');

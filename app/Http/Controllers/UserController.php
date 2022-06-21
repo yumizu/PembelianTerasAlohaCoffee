@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Alert;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Spatie\Permission\Models\Role;
 use Iluminate\Support\Facades\DB;
 class UserController extends Controller
@@ -86,9 +87,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
-        $user->assignRole($request->input('role'));
+        $user = User::find($request->id);
+        FacadesDB::table('model_has_roles')->where('model_id', $id)->delete();
+        $user->assignRole($request->roles);
         Alert::success('Update', 'Data Berhasil di Update');
         return redirect()->route('user.index');
     }
