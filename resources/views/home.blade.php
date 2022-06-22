@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout', ['background' => true])
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
