@@ -16,34 +16,37 @@
 	<table class="table table-bordered" width="100%" align="center">
 		<tr align="center">
 			<td>
-				<h2>Laporan Stok<br>Teras Aloha Coffee Bogor</h2>
+				<h2>Laporan Pembelian<br>Teras Aloha Coffee Bogor</h2>
 				<hr> </td>
 		</tr>
 	</table>
 	<table class="table table-bordered" width="100%" align="center">
 		<thead>
 			<tr>
-				<th>Kode</th>
-				<th>Nama</th>
-				<th>Stok Awal</th>
-				<th>Beli</th>
-				<th>Retur</th>
-				<th>Stok Total (Stok+Beli-retur)</th>
+				<th>No Pemesanan</th>
+				<th>Tanggal</th>
+				<th>Total</th>
 			</tr>
 		</thead>
 		<tbody> 
 			@foreach($data as $item)
 				<tr>
-					<td>{{ $item->kd_brg}}</td>
-					<td>{{ $item->nm_brg}}</td>
-					<td>{{ number_format($item->stok,0,',','.') }}</td>
-					<td>{{ number_format($item->beli,0,',','.') }}</td>
-					<td>{{ number_format($item->retur,0,',','.') }}</td>
-					<td>{{ number_format(($item->stok+$item->beli)-$item->retur) }}</td>
+					<td>{{ $item->no_pesan }}</td>
+					<td>{{ $item->tgl_pesan }}</td>
+					<td>Rp{{ number_format($item->total) }}</td>
 				</tr>
 			@endforeach
 		</tbody>
 	</table>
+	<div class="total mb-4" align="right">
+		@php
+			$total = 0;
+			foreach($data as $item) {
+				$total += $item->total;
+			}
+		@endphp
+		<b>Total Harga: Rp{{ number_format($total) }}</b>
+	</div>
 	<div align="right">
 		<h6>Tanda Tangan</h6>
 		<br>

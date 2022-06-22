@@ -100,4 +100,12 @@ class PembelianController extends Controller
             return redirect('/pembelian');
         }
     }
+
+    public function reportPDF()
+    {
+        $pesan = DB::select('SELECT * FROM pemesanan where not exists (select * from pembelian where pemesanan.no_pesan=pembelian.no_pesan)');
+        // dd($pesan);
+        $pdf = PDF::loadView('laporan.print_pembelian', ['data' => $pesan]);
+        return $pdf->stream();
+    }
 }

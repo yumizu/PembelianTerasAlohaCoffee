@@ -9,6 +9,9 @@
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <a href="{{ route('cetak.pembelian_pdf') }}" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm float-right ml-4">
+                    <i class="fas fa-print fa-sm text-white-50"></i> Cetak Laporan
+                </a>
                 <thead class="thead-dark">
                     <tr>
                         <th width="15%">No Pemesanan</th>
