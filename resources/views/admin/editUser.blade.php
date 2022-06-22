@@ -5,7 +5,7 @@
     @csrf
     <input type="hidden" name="_method" value="PUT">
     <fieldset>
-        <legend>Rubah Data User</legend>
+        <legend>Ubah Data User</legend>
         <div class="form-group row">
             <div class="col-md-5">
                 <label for="adduserid">User Id</label>

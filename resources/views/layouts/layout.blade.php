@@ -217,7 +217,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Create By: Intan & Kistina<br>Copyright &copy; Kelompok Mantappu 2022</span>
+                        <span>Created By: Intan & Kistina<br>Copyright &copy; Kelompok Mantappu 2022</span>
                     </div>
                 </div>
             </footer>

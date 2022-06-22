@@ -2,7 +2,7 @@
 @section('content')
 <form action="{{route('akun.update',[$akun->no_akun])}}" method="POST">@csrf
 <input type="hidden" name="_method" value="PUT">
-<fieldset><legend>Rubah Form Data Akun</legend>
+<fieldset><legend>Ubah Form Data Akun</legend>
  <div class="form-group row">
  <div class="col-md-5">
  <label for="addnoakun">Kode Akun</label>

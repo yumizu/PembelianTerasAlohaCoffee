@@ -5,7 +5,7 @@
     @csrf
     <input type="hidden" name="_method" value="PUT">
     <fieldset>
-        <legend>Rubah Data Supplier</legend>
+        <legend>Ubah Data Supplier</legend>
         <div class="form-group row">
             <div class="col-md-5">
                 <label for="addkdsupp">Kode Supplier</label>
