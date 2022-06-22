@@ -17,6 +17,10 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+        .bgsidebar {
+            background-color: #000000;
+        }
+      
     </style>
 
     <title>Beranda</title>
@@ -38,7 +42,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bgsidebar sidebar sidebar-dark accordion" id="accordionSidebar">
             <br />
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center p-3" href="#">
@@ -46,7 +50,7 @@
                     <img src="{{asset('asset/img/logo_aloha.png')}}" width="100">
                 </div>
             </a>
-            <div class="sidebar-brand sidebar-brand-text mx-2 p-3">Teras Aloha Coffee Bogor</div>
+            <div class="sidebar-brand sidebar-brand-text text-light mx-2 p-3">Teras Aloha Coffee Bogor</div>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -142,7 +146,7 @@
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <div class="input-group-append">
-                                <h4>Teras Aloha Coffee Bogor</h4>
+                                <h4 class="text-dark"><b>Teras Aloha Coffee Bogor</b></h4>
                             </div>
                         </div>
                     </form>
@@ -179,7 +183,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-dark small"><b>{{ Auth::user()->name }}</b></span>
                                 <img class="img-profile rounded-circle" src="{{asset('asset/img/avatar2.png')}}">
                             </a>
                             <!-- Dropdown - User Information -->
