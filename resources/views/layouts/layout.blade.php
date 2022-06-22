@@ -49,35 +49,41 @@
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Master</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('user.index') }}"> Master User</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('barang.index') }}"> Master Barang</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('supplier.index') }}"> Master Supplier</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('akun.index') }}"> Master Akun</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('setting.transaksi') }}"> Master Setting Akun</a>
+            @role('admin')
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                        aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Master</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('user.index') }}"> Master User</a>
+                            <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('barang.index') }}"> Master Barang</a>
+                            <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('supplier.index') }}"> Master Supplier</a>
+                            <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('akun.index') }}"> Master Akun</a>
+                            <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('setting.transaksi') }}"> Master Setting Akun</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            @endrole
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
                     aria-expanded="true" aria-controls="collapsePages1">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Transaksi</span>
-                    </a>
-                    <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                <i class="fas fa-fw fa-folder-open"></i>
+                <span>Transaksi</span>
+                </a>
+                <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    @role('admin')
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pemesanan.transaksi') }}"> Pemesanan</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pembelian.transaksi') }}"> Pembelian</a>
+                    @endrole
+                    <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pembelian.transaksi') }}"> Pembelian</a>
+                    @role('admin')
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('retur.transaksi') }}"> Retur</a>
-                    </div>
-                    </div>
+                    @endrole
+                </div>
+                </div>
             </li>
 
             <!-- Nav Item - Tables -->

@@ -126,4 +126,5 @@ class PemesananController extends Controller
         Alert::success('Pesan ','Data berhasil dihapus');
         return redirect('transaksi');
     }
+
 }
