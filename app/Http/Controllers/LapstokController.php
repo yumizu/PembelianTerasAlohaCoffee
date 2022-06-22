@@ -41,6 +41,13 @@ class LapStokController extends Controller
         //
     }
 
+    public function printReport(Request $request)
+    {
+        $data = Laporanstok::All();
+        $pdf = PDF::loadView('laporan.print_stok', ['data' => $data]);
+        return $pdf->stream();
+    }
+
     /**
      * Display the specified resource.
      *

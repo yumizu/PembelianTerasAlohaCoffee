@@ -55,10 +55,11 @@ Route::post('/retur/simpan', 'ReturController@simpan');
 Route::get('/retur/hapus/{no_beli}','ReturController@destroy');
 //Laporan
 Route::get('/laporan','LaporanController@index')->name('laporan.index');
-Route::get('/stok','LaporanController@index')->name('stok.index');
+// Route::get('/stok','LaporanController@index')->name('stok.index');
 
-Route::resource( '/laporan' , 'LaporanController');
-Route::resource( '/stok' , 'LapStokController');
+Route::resource('/laporan' , 'LaporanController');
+Route::resource('/stok' , 'LapStokController');
+Route::get('/stokreportpdf', 'LapStokController@printReport')->name('cetak.stok');
 Route::get('/laporan/faktur/{invoice}', 'PembelianController@pdf')->name('cetak.order_pdf');
 //laporan cetak
 Route::get('/laporancetak/cetak_pdf', 'LaporanController@cetak_pdf');

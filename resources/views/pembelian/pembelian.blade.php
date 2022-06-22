@@ -28,7 +28,8 @@
                                 <i class="fas fa-trash-alt fa-sm text-white-50"></i> Hapus</a>
                             @endrole
                             <a href="{{route('cetak.order_pdf',[Crypt::encryptString($pesan->no_pesan)])}}" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
-                            <i class="fas fa-print fa-sm text-white-50"></i> Cetak Invoice</a>
+                                <i class="fas fa-print fa-sm text-white-50"></i> Cetak Invoice
+                            </a>
                         </td>
                     </tr>
                     @endforeach
