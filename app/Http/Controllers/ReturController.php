@@ -64,10 +64,10 @@ class ReturController extends Controller
     public function edit($id)
     {
         $AWAL = 'RTR';
-            $bulanRomawi = array("", "I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
-            $noUrutAkhir = \App\Retur::max('no_retur');
-            $no = 1;            
-            $format=sprintf("%03s", abs((int)$noUrutAkhir + 1)). '/' . $AWAL .'/' . $bulanRomawi[date('n')] .'/' . date('Y');
+        $bulanRomawi = array("", "I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+        $noUrutAkhir = \App\Retur::max('no_retur');
+        $no = 1; 
+        $format=sprintf("%03s", abs((int)$noUrutAkhir + 1)). '/' . $AWAL .'/' . $bulanRomawi[date('n')] .'/' . date('Y');
         //No otomatis untuk jurnal
         $AWALJurnal = 'JRU';
         $bulanRomawij = array("", "I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
@@ -151,11 +151,19 @@ public function simpan(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $barang=\App\Retur::findOrFail($no_beli);
-        $barang->delete();
-        Alert::success('Pesan ','Data berhasil dihapus');
-        return redirect('transaksi');
+        $no_faktur = $request->no_faktur;
+        $pembelian = \App\Pembelian::where('no_beli', $no_faktur)->first();
+        if($pembelian) {
+            $detail = \App\DetailPembelian::where('no_beli', $pembelian->no_beli)->first();
+            if($detail) {
+                $detail->delete();
+            }
+            $pembelian->delete();
+        }
+        return [
+            'success' => true
+        ];
     }
 }

@@ -105,9 +105,9 @@
 				<td colspan="2">
 					<table>
 						<tr>
-							<td class="title"> <img src="asset/img/logo_ubsi.png" width="80px"> </td>
 							<td> Invoice : <strong>#{{ $noorder }}</strong>
 								<br> </td>
+							<td class="title"> <img src="asset/img/logo_aloha.png" width="80px"> </td>
 						</tr>
 					</table>
 				</td>
@@ -116,12 +116,12 @@
 				<td colspan="2">
 					<table>
 						<tr>
-							<td> @foreach($order as $pesan) @foreach($supp as $sp) @if($pesan->kd_supp==$sp->kd_supp) <strong>PENERIMA</strong>
-								<br>89 {{ $sp->nm_supp }}
+							<td> @foreach($order as $pesan) @foreach($supp as $sp) @if($pesan->kd_supp==$sp->kd_supp) <strong>PENGIRIM</strong>
+								<br> {{ $sp->nm_supp }}
 								<br> {{ $sp->alamat }}
 								<br> {{ $sp->telepon }}
 								<br> </td> @endif @endforeach @endforeach
-							<td> <strong>PENGIRIM</strong>
+							<td> <strong>PENERIMA</strong>
 								<br> BSI Sukabumi
 								<br> 026689788
 								<br> Jl Cemerlang No.8

@@ -8,6 +8,7 @@ use App\Supplier;
 use App\Pemesanan;
 use App\Pemesanan_tem;
 use App\Temp_pesan;
+use DB;
 use App\Jurnal;
 use App\Retur;
 use App\DetailRetur;
@@ -119,9 +120,13 @@ class PemesananController extends Controller
      */
     public function destroy($kd_brg)
     {
-        $barang = \App\Pemesanan_tem::where('kd_brg', $kd_brg);
+        $barang = \App\Pemesanan_tem::where('kd_brg', $kd_brg)->first();
         if ($barang) {
             $barang->delete();
+        }
+        $tampPembelian = DB::table('detail_pembelian')->where('kd_brg',$kd_brg);
+        if ($tampPembelian) {
+            $tampPembelian->delete();
         }
         Alert::success('Pesan ','Data berhasil dihapus');
         return redirect('transaksi');

@@ -50,7 +50,8 @@
                 <td width=10%><input name="jml_retur[]" class="form-control" type="number" value="0"></td>
                 <td align="center">
                 <a href="/transaksi/hapus/{{$bli->kd_brg}}" onclick="return confirm('Yakin Ingin menghapus data?')" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-                <i class="fas fa-trash-alt fa-sm text-white-50"></i> Hapus</a>
+                    <i class="fas fa-trash-alt fa-sm text-white-50"></i> Hapus
+                </a>
                         </td>
             </tr>
                 @endforeach

@@ -1,6 +1,6 @@
 @extends('layouts.layout') @section('content') @include('sweetalert::alert')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-	<h1 class="h3 mb-0 text-gray-800">Setting Akun untuk transaksi </h1> </div>
+	<h1 class="h3 mb-0 text-gray-800">Setting Akun Transaksi </h1> </div>
 <hr>
 <form action="/setting/simpan" method="POST"> @csrf @foreach ($setting as $stg)
 	<div class="row col-sm-6">

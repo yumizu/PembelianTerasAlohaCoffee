@@ -54,7 +54,7 @@ Route::get('/pembelianreportpdf', 'PembelianController@reportPDF')->name('cetak.
 Route::get('/retur','ReturController@index')->name('retur.transaksi');
 Route::get('/retur-beli/{id}', 'ReturController@edit');
 Route::post('/retur/simpan', 'ReturController@simpan');
-Route::get('/retur/hapus/{no_beli}','ReturController@destroy');
+Route::post('/retur/hapus','ReturController@destroy');
 //Laporan
 Route::get('/laporan','LaporanController@index')->name('laporan.index');
 // Route::get('/stok','LaporanController@index')->name('stok.index');
