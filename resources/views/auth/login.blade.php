@@ -12,8 +12,19 @@
  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
  <!-- Custom styles for this template-->
  <link href="{{ asset('asset/css/sb-admin-2.min.css')}}" rel="stylesheet">
+ <style>
+    .background-home {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("./asset/img/background2.jpg");
+        /* Center and scale the image nicely */
+        height: 100%;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+ </style>
 </head>
-<body class="bg-gradient-dark">
+<body class="background-home">
     <div class="container">
     <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -31,10 +42,13 @@
                                         </div>
                                         <form method="POST" action="{{ route('login') }}">
                                         @csrf
+                                        @if($errors->all())
+                                            <label for="error" class="col-form-label text-md-left text-danger">Login Salah, periksa kembali e-mail address dan password Anda!</label>
+                                        @endif
                                         <div class="form-group row">
                                             <label for="email" class="col-md-12 col-form-label text-md-left">{{ __('E-mail Address') }}</label>
                                             <div class="col-md-12"> 
-                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus> 
+                                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus> 
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
