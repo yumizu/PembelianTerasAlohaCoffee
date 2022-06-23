@@ -27,7 +27,7 @@
                         <td width="30%">
                             @role('admin')
                                 <a href="{{url('/pembelian-beli/'.Crypt::encryptString($pesan->no_pesan))}}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Beli</a>
-                                <a href="/akun/hapus/{{$pesan->no_pesan}}" onclick="return confirm('Yakin Ingin menghapus data?')" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                <a no_pesan="{{$pesan->no_pesan}}" href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
                                 <i class="fas fa-trash-alt fa-sm text-white-50"></i> Hapus</a>
                             @endrole
                             <a href="{{route('cetak.order_pdf',[Crypt::encryptString($pesan->no_pesan)])}}" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
@@ -42,4 +42,23 @@
     </div>
 </div>
 </form>
+<script>
+    var token = "{{ csrf_token() }}";
+    $('a[no_pesan]').click(function(){
+    var no_pesan = $(this).attr('no_pesan');
+    $.ajax({
+        url: '/deletepembelian',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            _token:token,
+            no_pesan: no_pesan,
+        },
+        success: function(data){
+            window.location = '{{ url("pembelian") }}';
+        }
+    });
+    return false;
+    });
+</script>
 @endsection

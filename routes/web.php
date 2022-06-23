@@ -48,6 +48,7 @@ Route::get('/pembelian', 'PembelianController@index')->name('pembelian.transaksi
 Route::get('/pembelian-beli/{id}', 'PembelianController@edit');
 Route::post('/pembelian/simpan', 'PembelianController@simpan');
 Route::get('/pembelian/{id}', 'PembelianController@pdf')->name('cetak.order_pdf');
+Route::post('/deletepembelian', 'PembelianController@delete');
 Route::get('/pembelianreportpdf', 'PembelianController@reportPDF')->name('cetak.pembelian_pdf');
 //Retur 
 Route::get('/retur','ReturController@index')->name('retur.transaksi');

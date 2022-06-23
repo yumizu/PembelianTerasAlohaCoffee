@@ -12,7 +12,9 @@ use App\Temp_pesan;
 use App\Jurnal;
 use DB;
 use Alert;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use PDF;
+use Pemesanan;
 
 class PembelianController extends Controller
 {
@@ -107,5 +109,21 @@ class PembelianController extends Controller
         // dd($pesan);
         $pdf = PDF::loadView('laporan.print_pembelian', ['data' => $pesan]);
         return $pdf->stream();
+    }
+
+    public function delete(Request $request)
+    {
+        $no_pesan = $request->no_pesan;
+        $pemesanan = \App\Pemesanan::where('no_pesan', $no_pesan)->first();
+        if ($pemesanan) {
+            $detailPesan = \App\DetailPesan::where('no_pesan', $no_pesan)->first();
+            if ($detailPesan) {
+                DB::table('detail_pesan')->where('no_pesan', $no_pesan)->delete();
+            }
+            DB::table('pemesanan')->where('no_pesan', $no_pesan)->delete();
+        }
+       return [
+            'success' => true
+       ];
     }
 }
