@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Laporan Buku Besar</title>
+	<title>Laporan Jurnal Umum</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<style type="text/css">
 	table tr td,
@@ -25,6 +25,7 @@
 			<tr>
 				<th width="5%">Tanggal Transaksi</th>
 				<th width="15%">Nama Akun/Perkiraan</th>
+				<th width="5%">Ref</th>
 				<th width="5%">Debet</th>
 				<th width="5%">Kredit</th>
 			</tr>
@@ -37,11 +38,13 @@
 			<tr>
 				<td>{{$bb->tgl_jurnal}}</td>
 				<td>{{$bb->no_jurnal}} {{$bb->keterangan}}</td>
+				<td>{{ $bb->no_akun }}</td>
 				<td>{{number_format($bb->debet)}}</td>
 				<td>{{number_format($bb->kredit)}}</td>
 			</tr>
 			<!-- hitung total debet dan kredit -->{{$subtotal1 += $bb->debet}}; {{$subtotal2 += $bb->kredit}}; @endif @endforeach @endforeach
 			<tr>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td>Rp. {{ number_format($subtotal1) }}</td>

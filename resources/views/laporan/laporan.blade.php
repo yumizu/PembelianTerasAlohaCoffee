@@ -4,7 +4,7 @@
 	<div class="row justify-content-center">
 		<div class="col-md-12">
 			<div class="card">
-				<div class="cardheader">Laporan Transaksi Jurnal</div>
+				<div class="card-header">Laporan Transaksi Jurnal</div>
 				<div class="card-body">
 					<form action="/laporan/cetak" method="PUT" target="_blank"> 
                     @csrf

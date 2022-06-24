@@ -82,24 +82,22 @@
                     </div>
                 </li>
             @endrole
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
-                    aria-expanded="true" aria-controls="collapsePages1">
-                <i class="fas fa-fw fa-folder-open"></i>
-                <span>Transaksi</span>
-                </a>
-                <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    @role('admin')
+            @role('admin')
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
+                        aria-expanded="true" aria-controls="collapsePages1">
+                    <i class="fas fa-fw fa-folder-open"></i>
+                    <span>Transaksi</span>
+                    </a>
+                    <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pemesanan.transaksi') }}"> Pemesanan</a>
-                    @endrole
-                    <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pembelian.transaksi') }}"> Pembelian</a>
-                    @role('admin')
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pembelian.transaksi') }}"> Pembelian</a>
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('retur.transaksi') }}"> Retur</a>
-                    @endrole
-                </div>
-                </div>
-            </li>
+                    </div>
+                    </div>
+                </li>
+            @endrole
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -110,8 +108,8 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pembelian.periode') }}"> Pembelian</a>
-                    <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.index') }}" > Jurnal Umum</a>
                     <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('stok.index') }}"> Stok Barang</a>
+                    <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.index') }}" > Jurnal Umum</a>
                 
                 </div>
                 </div>
