@@ -49,7 +49,8 @@ Route::get('/pembelian-beli/{id}', 'PembelianController@edit');
 Route::post('/pembelian/simpan', 'PembelianController@simpan');
 Route::get('/pembelian/{id}', 'PembelianController@pdf')->name('cetak.order_pdf');
 Route::post('/deletepembelian', 'PembelianController@delete');
-Route::get('/pembelianreportpdf', 'PembelianController@reportPDF')->name('cetak.pembelian_pdf');
+Route::post('/pembelianreportpdf', 'PembelianController@reportPDF')->name('cetak.pembelian_pdf');
+Route::get('/pembelianperiode', 'PembelianController@periodeLaporan')->name('pembelian.periode');
 //Retur 
 Route::get('/retur','ReturController@index')->name('retur.transaksi');
 Route::get('/retur-beli/{id}', 'ReturController@edit');
@@ -58,7 +59,6 @@ Route::post('/retur/hapus','ReturController@destroy');
 //Laporan
 Route::get('/laporan','LaporanController@index')->name('laporan.index');
 // Route::get('/stok','LaporanController@index')->name('stok.index');
-
 Route::resource('/laporan' , 'LaporanController');
 Route::resource('/stok' , 'LapStokController');
 Route::get('/stokreportpdf', 'LapStokController@printReport')->name('cetak.stok');

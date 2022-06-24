@@ -25,6 +25,12 @@ class PembelianController extends Controller
         $pesan = DB::select('SELECT * FROM pemesanan where not exists (select * from pembelian where pemesanan.no_pesan=pembelian.no_pesan)');
         return view('pembelian.pembelian', ['pemesanan' => $pesan]);
     }
+
+    public function periodeLaporan()
+    {
+        return view('laporan.periode_pembelian');
+    }
+
     public function edit($id)
     {
         $AWAL = 'FKT';
@@ -103,10 +109,22 @@ class PembelianController extends Controller
         }
     }
 
-    public function reportPDF()
+    public function reportPDF(Request $request)
     {
-        $pesan = DB::select('SELECT * FROM pemesanan where not exists (select * from pembelian where pemesanan.no_pesan=pembelian.no_pesan)');
-        // dd($pesan);
+        // dd($request->all());
+        $periode = $request->periode;
+        $pesan = [];
+        if ($periode == "All") {
+            $pesan = DB::select('SELECT * FROM pemesanan where not exists (select * from pembelian where pemesanan.no_pesan=pembelian.no_pesan)');
+        } else {
+            $firstDate = $request->tglawal;
+            $secondDate = $request->tglakhir;
+            $pesan = DB::table('pembelian')
+                ->join('pemesanan', 'pembelian.no_pesan', '=', 'pemesanan.no_pesan')
+                ->whereBetween('tgl_beli', [$firstDate, $secondDate])
+                ->orderby('tgl_beli','ASC')
+                ->get();
+        }
         $pdf = PDF::loadView('laporan.print_pembelian', ['data' => $pesan]);
         return $pdf->stream();
     }

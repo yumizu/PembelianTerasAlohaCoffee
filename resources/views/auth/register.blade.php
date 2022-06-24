@@ -16,9 +16,20 @@
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('asset/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <style>
+        .background-home {
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("./asset/img/background3.jpg");
+            /* Center and scale the image nicely */
+            height: 100%;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>   
 </head>
 
-<body class="bg-gradient-dark">
+<body class="background-home">
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">

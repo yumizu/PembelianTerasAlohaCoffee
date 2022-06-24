@@ -109,6 +109,7 @@
                 </a>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pembelian.periode') }}"> Pembelian</a>
                     <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.index') }}" > Jurnal Umum</a>
                     <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('stok.index') }}"> Stok Barang</a>
                 
