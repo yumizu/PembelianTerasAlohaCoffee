@@ -122,10 +122,10 @@
 								<br> {{ $sp->telepon }}
 								<br> </td> @endif @endforeach @endforeach
 							<td> <strong>PENERIMA</strong>
-								<br> BSI Sukabumi
-								<br> 026689788
-								<br> Jl Cemerlang No.8
-								<br> Sukakarya, Kota Sukabumi
+								<br> Teras Aloha Coffee Bogor
+								<br> 0818211919
+								<br> Jl. Ciwaringin I No.7
+								<br> Kota Bogor
 								<br> Jawa Barat </td>
 						</tr>
 					</table>

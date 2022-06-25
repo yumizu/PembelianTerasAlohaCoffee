@@ -16,7 +16,7 @@
 	<table class="table table-bordered" width="100%" align="center">
 		<tr align="center">
 			<td>
-				<h2>Laporan Stok<br>Teras Aloha Coffee Bogor</h2>
+				<h2>Laporan Stok Barang<br>Teras Aloha Coffee Bogor</h2>
 				<hr> </td>
 		</tr>
 	</table>
