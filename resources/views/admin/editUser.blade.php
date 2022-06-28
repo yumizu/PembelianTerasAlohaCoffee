@@ -28,7 +28,8 @@
                 <select id="roles" name="roles" class="form-control" required>
                     <option value="">--Pilih Roles--</option>
                     <option value="1" {{ $user->roles->pluck('id')->first() == 1 ? 'selected' : '' }}>Admin</option>
-                    <option value="2" {{ $user->roles->pluck('id')->first() == 2 ? 'selected' : '' }}>User</option>
+                    <option value="2" {{ $user->roles->pluck('id')->first() == 2 ? 'selected' : '' }}>Owner</option>
+                    <option value="3" {{ $user->roles->pluck('id')->first() == 3 ? 'selected' : '' }}>Operational</option>
                 </select>
             </div>
 

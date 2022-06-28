@@ -117,13 +117,13 @@
                 </a>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    @hasanyrole('user|admin')
+                    @hasanyrole('owner|admin')
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pembelian.periode') }}"> Pembelian</a>
                     @endhasanyrole
-                    @hasanyrole('user|admin|operational')
+                    @hasanyrole('owner|admin|operational')
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('stok.index') }}"> Stok Barang</a>
                     @endhasanyrole
-                    @hasanyrole('user|admin')
+                    @hasanyrole('owner|admin')
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.index') }}" > Jurnal Umum</a>
                     @endhasanyrole
                 </div>

@@ -68,7 +68,7 @@ class RegisterController extends Controller
         $save_user->name = $data['name'];
         $save_user->email = $data['email'];
         $save_user->password = bcrypt($data['password']);
-        $save_user->assignRole('user');
+        $save_user->assignRole('owner');
         $save_user->save();
         return $save_user;
     }

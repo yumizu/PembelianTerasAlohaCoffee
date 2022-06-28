@@ -81,7 +81,7 @@
                                     <select id="roles" name="roles" class="form-control" required>
                                         <option value="">--Pilih Roles--</option>
                                         <option value="ADMIN">Admin</option>
-                                        <option value="USER">User</option>
+                                        <option value="OWNER">Owner</option>
                                         <option value="OPERATIONAL">Operational</option>
                                     </select>
                                 </div>
@@ -91,8 +91,8 @@
                             <button type="button" class="btn btn-light" data-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
-                        @endsection
                     </div>
         </form>
     </div>
 </div>
+@endsection
