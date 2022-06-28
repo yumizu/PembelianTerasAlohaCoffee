@@ -82,6 +82,7 @@
                                         <option value="">--Pilih Roles--</option>
                                         <option value="ADMIN">Admin</option>
                                         <option value="USER">User</option>
+                                        <option value="OPERATIONAL">Operational</option>
                                     </select>
                                 </div>
                             </div>

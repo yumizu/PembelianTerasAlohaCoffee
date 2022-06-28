@@ -42,17 +42,11 @@ class UserController extends Controller
         $save_user->name=$request->get('username');
         $save_user->email=$request->get('email');
         $save_user->password= bcrypt('password');
-        if ($request->get('roles')=='ADMIN'){
-        $save_user->assignRole('admin');}
-        else
-        {
-        $save_user->assignRole('user');}
+        $save_user->assignRole(strtolower($request->roles));
         $save_user->save();
         Alert::success('Tersimpan','Data Berhasil disimpan');
         return redirect()->route('user.index');
-        
     }
-
     /**
      * Display the specified resource.
      *
@@ -108,8 +102,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $hapus = \App\User::findOrFail($id);
+        $hapus->syncRoles([]);
         $hapus->delete();
-        $hapus->removeRole('admin','user');
         Alert::success('Terhapus','Data Berhasil dihapus');
         return redirect()->route('user.index');
     }
