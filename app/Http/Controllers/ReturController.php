@@ -84,6 +84,20 @@ class ReturController extends Controller
 
 public function simpan(Request $request)
 {
+    $this->validate($request, [
+        'no_retur' => 'required',
+        'tgl' => 'required',
+    ]);
+    if (count($request->jml_retur) > 0) {
+        foreach($request->jml_retur as $jml) {
+            if ($jml == 0) {
+                return redirect()
+                    ->back()
+                    ->withInput($request->input())
+                    ->withErrors(['error' => 'Jumlah retur tidak boleh kosong']);
+            }
+        }
+    }
     if (Retur::where('no_retur', $request->no_retur)->exists()) {
         Alert::warning('Pesan ','Retur sudah dilakukan ');
         return redirect('retur');

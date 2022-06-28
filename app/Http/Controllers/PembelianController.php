@@ -61,6 +61,13 @@ class PembelianController extends Controller
     }
     public function simpan(Request $request)
     {
+        // dd($request->all());
+        $this->validate($request, [
+            'no_faktur' => 'required',
+            'no_pesan' => 'required',
+            'tgl' => 'required',
+            'kd_brg' => 'required'
+        ]);
         if (Pembelian::where('no_pesan', $request->no_pesan)->exists()) {
             Alert::warning('Pesan ', 'Pembelian Telah dilakukan ');
 
