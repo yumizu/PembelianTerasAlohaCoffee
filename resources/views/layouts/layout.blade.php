@@ -76,9 +76,9 @@
                             @role('admin')
                                 <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('user.index') }}"> Master User</a>
                             @endrole
-                            @hasanyrole('admin|operational')
+                            @role('operational')
                                 <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('barang.index') }}"> Master Barang</a>
-                            @endhasanyrole
+                            @endrole
                             @role('admin')
                                 <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('supplier.index') }}"> Master Supplier</a>
                                 <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('akun.index') }}"> Master Akun</a>
@@ -101,9 +101,9 @@
                             <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pemesanan.transaksi') }}"> Pemesanan</a>
                             <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pembelian.transaksi') }}"> Pembelian</a>
                         @endrole
-                        @hasanyrole('admin|operational')
+                        @role('operational')
                             <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('retur.transaksi') }}"> Retur</a>
-                        @endhasanyrole
+                        @endrole
                     </div>
                     </div>
                 </li>
@@ -120,7 +120,7 @@
                     @hasanyrole('owner|admin')
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('pembelian.periode') }}"> Pembelian</a>
                     @endhasanyrole
-                    @hasanyrole('owner|admin|operational')
+                    @hasanyrole('owner|operational')
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('stok.index') }}"> Stok Barang</a>
                     @endhasanyrole
                     @hasanyrole('owner|admin')
