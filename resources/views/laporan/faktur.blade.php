@@ -99,13 +99,14 @@
 </head>
 
 <body>
+	<center><h2>Permintaan Pembelian</h2></center>
 	<div class="invoice-box">
 		<table cellpadding="0" cellspacing="0">
 			<tr class="top">
 				<td colspan="2">
 					<table>
 						<tr>
-							<td> Invoice : <strong>#{{ $noorder }}</strong>
+							<td> No : <strong>#{{ $noorder }}</strong>
 								<br> </td>
 							<td class="title"> <img src="asset/img/logo_aloha.png" width="80px"> </td>
 						</tr>
