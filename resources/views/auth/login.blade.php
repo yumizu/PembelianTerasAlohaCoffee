@@ -43,6 +43,7 @@
                                         <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         @if($errors->all())
+
                                             <label for="error" class="col-form-label text-md-left text-danger">Login Salah, periksa kembali e-mail address dan password Anda!</label>
                                         @endif
                                         <div class="form-group row">

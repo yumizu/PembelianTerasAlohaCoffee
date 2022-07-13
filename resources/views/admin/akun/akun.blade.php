@@ -9,6 +9,9 @@
     <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable">
         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
     </button>
+    <a href="{{ route('setting.transaksi') }}" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm text-white">
+        <i class="fas fa-plus fa-sm text-white-50"></i> Setting Akun
+    </a>
 </div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
 <div class="card-body">

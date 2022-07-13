@@ -82,7 +82,6 @@
                             @role('admin')
                                 <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('supplier.index') }}"> Master Supplier</a>
                                 <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('akun.index') }}"> Master Akun</a>
-                                <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('setting.transaksi') }}"> Master Setting Akun</a>
                             @endrole
                         </div>
                     </div>
