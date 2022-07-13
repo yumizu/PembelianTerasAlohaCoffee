@@ -10,6 +10,7 @@ use App\DetailRetur;
 use App\Pembelian;
 use DB;
 use Alert;
+use App\DetailJurnal;
 
 class ReturController extends Controller
 {
@@ -101,49 +102,70 @@ public function simpan(Request $request)
     if (Retur::where('no_retur', $request->no_retur)->exists()) {
         Alert::warning('Pesan ','Retur sudah dilakukan ');
         return redirect('retur');
-    }else{
-         //SIMPAN DATA KE TABEL DETAIL PEMBELIAN
-        $kdbrg  = $request->kd_brg;
-        $qtyretur = $request->jml_retur;
-        $harga   = $request->harga;
-        $total=0;
-        foreach($kdbrg as $key => $no)
-        {
-            $input['no_retur']   = $request->no_retur;
-            $input['kd_brg']    = $kdbrg[$key];
-            $input['qty_retur']  = $qtyretur[$key];
-            $input['sub_retur']  = $harga[$key]*$qtyretur[$key]
-        ;
-        DetailRetur::insert($input);
-        $total=$harga[$key]*$qtyretur[$key];
-    }
-    //Simpan ke table retur
-    $tambah_pembelian=new \App\Retur;
-    $tambah_pembelian->no_retur = $request->no_retur;
-    $tambah_pembelian->tgl_retur = $request->tgl;
-    $tambah_pembelian->total_retur = $total;
-    $tambah_pembelian->save();
-   //SIMPAN ke table jurnal bagian debet
-    $tambah_jurnaldebet=new \App\Jurnal;
-    $tambah_jurnaldebet->no_jurnal = $request->no_jurnal;
-    $tambah_jurnaldebet->keterangan = 'Kas';
-    $tambah_jurnaldebet->tgl_jurnal = $request->tgl;
-    $tambah_jurnaldebet->no_akun = $request->kas;
-    $tambah_jurnaldebet->debet = $total;
-    $tambah_jurnaldebet->kredit = '0';
-    $tambah_jurnaldebet->save();
-    
-    //SIMPAN ke table jurnal bagian kredit
-    $tambah_jurnalkredit=new \App\Jurnal;
-    $tambah_jurnalkredit->no_jurnal = $request->no_jurnal;
-    $tambah_jurnalkredit->keterangan = 'Retur Pembelian';
-    $tambah_jurnalkredit->tgl_jurnal = $request->tgl;
-    $tambah_jurnalkredit->no_akun = $request->retur;
-    $tambah_jurnalkredit->debet ='0';
-    $tambah_jurnalkredit->kredit = $total;
-    $tambah_jurnalkredit->save();
-    Alert::success('Pesan ','Data berhasil disimpan');
-    return redirect('/retur');
+    } else {
+        DB::beginTransaction();
+        try {
+            //SIMPAN DATA KE TABEL DETAIL PEMBELIAN
+            $kdbrg  = $request->kd_brg;
+            $qtyretur = $request->jml_retur;
+            $harga   = $request->harga;
+            $nmbrg = $request->nm_brg;
+            $total=0;
+
+
+            //SIMPAN ke table jurnal bagian debet
+            $tambah_jurnaldebet=new \App\Jurnal;
+            $tambah_jurnaldebet->no_jurnal = $request->no_jurnal;
+            $tambah_jurnaldebet->keterangan = 'Kas';
+            $tambah_jurnaldebet->tgl_jurnal = $request->tgl;
+            $tambah_jurnaldebet->no_akun = $request->kas;
+            $tambah_jurnaldebet->debet = $total;
+            $tambah_jurnaldebet->kredit = '0';
+            $tambah_jurnaldebet->save();
+            
+            //SIMPAN ke table jurnal bagian kredit
+            $tambah_jurnalkredit=new \App\Jurnal;
+            $tambah_jurnalkredit->no_jurnal = $request->no_jurnal;
+            $tambah_jurnalkredit->keterangan = 'Retur Pembelian';
+            $tambah_jurnalkredit->tgl_jurnal = $request->tgl;
+            $tambah_jurnalkredit->no_akun = $request->retur;
+            $tambah_jurnalkredit->debet ='0';
+            $tambah_jurnalkredit->kredit = $total;
+            $tambah_jurnalkredit->save();
+
+            foreach($kdbrg as $key => $no)
+            {
+                $input['no_retur']   = $request->no_retur;
+                $input['kd_brg']    = $kdbrg[$key];
+                $input['qty_retur']  = $qtyretur[$key];
+                $input['sub_retur']  = $harga[$key]*$qtyretur[$key];
+                DetailRetur::insert($input);
+                $total=$harga[$key]*$qtyretur[$key];
+                
+                DetailJurnal::create([
+                    'jurnal_id' => $tambah_jurnalkredit->id,
+                    'no_jurnal' => $request->no_jurnal,
+                    'kd_brg' => $kdbrg[$key],
+                    'nm_brg' => $nmbrg[$key],
+                    'qty' => $qtyretur[$key],
+                    'subtotal' => $harga[$key]*$qtyretur[$key],
+                ]);
+            }
+            //Simpan ke table retur
+            $tambah_pembelian=new \App\Retur;
+            $tambah_pembelian->no_retur = $request->no_retur;
+            $tambah_pembelian->tgl_retur = $request->tgl;
+            $tambah_pembelian->total_retur = $total;
+            $tambah_pembelian->save();
+
+            DB::commit();
+            Alert::success('Pesan ','Data berhasil disimpan');
+        } catch(\Throwable $e) {
+            DB::rollback();
+            throw $e;
+        }
+        
+        return redirect('/retur');
     }
 }
 

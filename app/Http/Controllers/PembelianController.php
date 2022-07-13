@@ -12,6 +12,7 @@ use App\Temp_pesan;
 use App\Jurnal;
 use DB;
 use Alert;
+use App\DetailJurnal;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use PDF;
 use Pemesanan;
@@ -73,45 +74,66 @@ class PembelianController extends Controller
 
             return redirect('pembelian');
         } else {
-            //Simpan ke table pembelian
-            $tambah_pembelian = new \App\Pembelian;
-            $tambah_pembelian->no_beli = $request->no_faktur;
-            $tambah_pembelian->tgl_beli = $request->tgl;
-            $tambah_pembelian->no_faktur = $request->no_faktur;
-            $tambah_pembelian->total_beli = $request->total;
-            $tambah_pembelian->no_pesan = $request->no_pesan;
-            $tambah_pembelian->save();
-            //SIMPAN DATA KE TABEL DETAIL PEMBELIAN
-            $kdbrg = $request->kd_brg;
-            $qtybeli = $request->qty_beli;
-            $subbeli = $request->sub_beli;
-            foreach ($kdbrg as $key => $no) {
-                $input['no_beli'] = $request->no_faktur;
-                $input['kd_brg'] = $kdbrg[$key];
-                $input['qty_beli'] = $qtybeli[$key];
-                $input['sub_beli'] = $subbeli[$key];
-                DetailPembelian::insert($input);
-            }
-            //SIMPAN ke table jurnal bagian debet
-            $tambah_jurnaldebet = new \App\Jurnal;
-            $tambah_jurnaldebet->no_jurnal = $request->no_jurnal;
-            $tambah_jurnaldebet->keterangan = 'Pembelian Barang ';
-            $tambah_jurnaldebet->tgl_jurnal = $request->tgl;
-            $tambah_jurnaldebet->no_akun = $request->pembelian;
-            $tambah_jurnaldebet->debet = $request->total;
-            $tambah_jurnaldebet->kredit = '0';
-            $tambah_jurnaldebet->save();
+            DB::beginTransaction();
+            try {
 
-            //SIMPAN ke table jurnal bagian kredit
-            $tambah_jurnalkredit = new \App\Jurnal;
-            $tambah_jurnalkredit->no_jurnal = $request->no_jurnal;
-            $tambah_jurnalkredit->keterangan = 'Kas';
-            $tambah_jurnalkredit->tgl_jurnal = $request->tgl;
-            $tambah_jurnalkredit->no_akun = $request->akun;
-            $tambah_jurnalkredit->debet = '0';
-            $tambah_jurnalkredit->kredit = $request->total;
-            $tambah_jurnalkredit->save();
-            Alert::success('Pesan ', 'Data berhasil disimpan');
+                //Simpan ke table pembelian
+                $tambah_pembelian = new \App\Pembelian;
+                $tambah_pembelian->no_beli = $request->no_faktur;
+                $tambah_pembelian->tgl_beli = $request->tgl;
+                $tambah_pembelian->no_faktur = $request->no_faktur;
+                $tambah_pembelian->total_beli = $request->total;
+                $tambah_pembelian->no_pesan = $request->no_pesan;
+                $tambah_pembelian->save();
+    
+                //SIMPAN ke table jurnal bagian debet
+                $tambah_jurnaldebet = new \App\Jurnal;
+                $tambah_jurnaldebet->no_jurnal = $request->no_jurnal;
+                $tambah_jurnaldebet->keterangan = 'Pembelian Barang ';
+                $tambah_jurnaldebet->tgl_jurnal = $request->tgl;
+                $tambah_jurnaldebet->no_akun = $request->pembelian;
+                $tambah_jurnaldebet->debet = $request->total;
+                $tambah_jurnaldebet->kredit = '0';
+                $tambah_jurnaldebet->save();
+    
+                //SIMPAN ke table jurnal bagian kredit
+                $tambah_jurnalkredit = new \App\Jurnal;
+                $tambah_jurnalkredit->no_jurnal = $request->no_jurnal;
+                $tambah_jurnalkredit->keterangan = 'Kas';
+                $tambah_jurnalkredit->tgl_jurnal = $request->tgl;
+                $tambah_jurnalkredit->no_akun = $request->akun;
+                $tambah_jurnalkredit->debet = '0';
+                $tambah_jurnalkredit->kredit = $request->total;
+                $tambah_jurnalkredit->save();
+    
+                //SIMPAN DATA KE TABEL DETAIL PEMBELIAN
+                $kdbrg = $request->kd_brg;
+                $qtybeli = $request->qty_beli;
+                $subbeli = $request->sub_beli;
+                $nmbrg = $request->nm_brg;
+    
+                foreach ($kdbrg as $key => $no) {
+                    $input['no_beli'] = $request->no_faktur;
+                    $input['kd_brg'] = $kdbrg[$key];
+                    $input['qty_beli'] = $qtybeli[$key];
+                    $input['sub_beli'] = $subbeli[$key];
+                    DetailPembelian::insert($input);
+    
+                    DetailJurnal::create([
+                        'jurnal_id' => $tambah_jurnaldebet->id,
+                        'no_jurnal' => $request->no_jurnal,
+                        'kd_brg' => $kdbrg[$key],
+                        'nm_brg' => $nmbrg[$key],
+                        'qty' => $qtybeli[$key],
+                        'subtotal' => $subbeli[$key]
+                    ]);
+                }
+                DB::commit();
+                Alert::success('Pesan ', 'Data berhasil disimpan');
+            } catch(\Throwable $e) {
+                DB::rollback();
+                throw $e;
+            }
             return redirect('/pembelian');
         }
     }

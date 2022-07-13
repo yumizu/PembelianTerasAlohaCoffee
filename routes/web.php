@@ -58,6 +58,8 @@ Route::post('/retur/simpan', 'ReturController@simpan');
 Route::post('/retur/hapus','ReturController@destroy');
 //Laporan
 Route::get('/laporan','LaporanController@index')->name('laporan.index');
+Route::get('/laporan/detail/{no_jurnal}', 'LaporanController@detail')->name('laporan.detail');
+Route::get('/laporan/detail/{jurnal_id}/barang', 'LaporanController@detailBarang')->name('laporan.detail.barang');
 // Route::get('/stok','LaporanController@index')->name('stok.index');
 Route::resource('/laporan' , 'LaporanController');
 Route::resource('/stok' , 'LapStokController');

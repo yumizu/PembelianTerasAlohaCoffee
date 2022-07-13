@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Laporan;
 use PDF;
 use DB;
+use Jurnal;
 
 class LaporanController extends Controller
 {
@@ -16,7 +16,24 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        return view('laporan.laporan');
+        $jurnalModel = new \App\Jurnal;
+        $no_jurnal = $jurnalModel->pluck('no_jurnal')->unique()->all();
+        return view('laporan.laporan', compact('no_jurnal'));
+    }
+
+    public function detail($no_jurnal)
+    {
+        $jurnalModel = new \App\Jurnal;
+        $no_jurnal = str_replace('_', '/', $no_jurnal);
+        $jurnal = $jurnalModel->where('no_jurnal', $no_jurnal)->get();
+        return view('laporan.laporan_detail', compact('jurnal'));
+    }
+
+    public function detailBarang($jurnal_id)
+    {
+        $jurnalDetailModel = new \App\DetailJurnal();
+        $details = $jurnalDetailModel->where('jurnal_id', $jurnal_id)->get();
+        return view('laporan.laporan_detail_barang', compact('details'));
     }
 
     /**

@@ -44,10 +44,16 @@
                     </thead>
                     <tbody>
                         @php($total = 0) @foreach($detail as $temp) <tr>
-                            <td><input name="no_beli[]" class="form-control" type="hidden"
-                                    value="{{ $temp->no_pesan }}" readonly><input name="kd_brg[]" class="form-control"
+                            <td>
+                                <input name="no_beli[]" class="form-control" type="hidden"
+                                    value="{{ $temp->no_pesan }}" readonly>
+                                <input name="kd_brg[]" class="form-control"
                                     type="hidden" value="{{ $temp->kd_brg }}" readonly>{{ $temp->kd_brg }}</td>
-                            <td>{{ $temp->nm_brg }}</td>
+                            <td>
+                                <!-- {{ $temp->nm_brg }} -->
+                                <input name="nm_brg[]" class="form-control"
+                                    type="hidden" value="{{ $temp->nm_brg }}" readonly>{{ $temp->nm_brg }}</td>
+                            </td>
                             <td><input name="qty_beli[]" class="form-control" type="hidden"
                                     value="{{ $temp->qty_pesan }}" readonly>{{ $temp->qty_pesan }}</td>
                             <td><input name="sub_beli[]" class="form-control" type="hidden"

@@ -33,7 +33,38 @@
 					</form>
 				</div>
 			</div>
+			<br>
+			<div class="card">
+				<div class="card-header">Detail Jurnal</div>
+				<div class="card-body">
+					<div class="col-md-12">
+						<label for="klasifikasi">No Jurnal</label>
+						<div class="row">
+							<div class="col-md-3">
+								<select id="no_jurnal" name="no_jurnal" class="form-control no_jurnal">
+									<option value="">--Pilih No Jurnal--</option>
+									@foreach($no_jurnal as $no)
+										<option value="{{ $no }}">{{ $no }}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="">
+								<a id="detail" href="#" class="btn btn-success">Lihat Detail</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div> 
+<script>
+	$(document).ready(function(){
+        $("select.no_jurnal").change(function(){
+			var selectedid  = $(".no_jurnal option:selected").val();
+			selectedid = selectedid.replaceAll('/', '_');
+            $("#detail").attr("href","/laporan/detail/" + selectedid);  //-----this will change href 
+        });
+    });
+</script>
 @endsection

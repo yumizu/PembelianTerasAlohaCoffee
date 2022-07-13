@@ -46,7 +46,10 @@
                                 <tr>
                                     <td><input name="kd_brg[]" class="form-control" type="hidden"
                                             value="{{ $bli->kd_brg }}" readonly>{{ $bli->kd_brg }}</td>
-                                    <td>{{ $bli->nm_brg }}</td>
+                                    <td>
+                                        <input name="nm_brg[]" class="form-control" type="hidden"
+                                            value="{{ $bli->nm_brg }}" readonly>
+                                    </td>
                                     <td align="center">
                                         <input name="qty_beli[]" class="form-control" type="hidden"
                                             value="{{ $bli->qty_beli }}" readonly>
