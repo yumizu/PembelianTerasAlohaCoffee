@@ -110,8 +110,11 @@ public function simpan(Request $request)
             $qtyretur = $request->jml_retur;
             $harga   = $request->harga;
             $nmbrg = $request->nm_brg;
-            $total=0;
-
+            $total = 0;
+            foreach($kdbrg as $key => $no)
+            {
+                $total += $harga[$key];
+            }
 
             //SIMPAN ke table jurnal bagian debet
             $tambah_jurnaldebet=new \App\Jurnal;
@@ -140,7 +143,7 @@ public function simpan(Request $request)
                 $input['qty_retur']  = $qtyretur[$key];
                 $input['sub_retur']  = $harga[$key]*$qtyretur[$key];
                 DetailRetur::insert($input);
-                $total=$harga[$key]*$qtyretur[$key];
+                $totalItemPrice=$harga[$key];
                 
                 DetailJurnal::create([
                     'jurnal_id' => $tambah_jurnalkredit->id,
@@ -148,7 +151,7 @@ public function simpan(Request $request)
                     'kd_brg' => $kdbrg[$key],
                     'nm_brg' => $nmbrg[$key],
                     'qty' => $qtyretur[$key],
-                    'subtotal' => $harga[$key]*$qtyretur[$key],
+                    'subtotal' => $totalItemPrice
                 ]);
             }
             //Simpan ke table retur
