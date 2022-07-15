@@ -16,9 +16,9 @@ class CreateJurnalTable extends Migration
         Schema::create('detail_jurnal', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('jurnal_id');
-            $table->string('no_jurnal');
-            $table->string('kd_brg');
-            $table->string('nm_brg');
+            $table->string('no_jurnal', 14);
+            $table->string('kd_brg', 5);
+            $table->string('nm_brg', 30);
             $table->integer('qty');
             $table->integer('subtotal');
             $table->timestamps();
