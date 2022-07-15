@@ -44,20 +44,22 @@
                         @php($total = 0)
                             @foreach($beli as $bli)
                                 <tr>
-                                    <td><input name="kd_brg[]" class="form-control" type="hidden"
-                                            value="{{ $bli->kd_brg }}" readonly>{{ $bli->kd_brg }}</td>
                                     <td>
-                                        <input name="nm_brg[]" class="form-control" type="hidden"
-                                            value="{{ $bli->nm_brg }}" readonly>
+                                        <input name="kd_brg[]" class="form-control" type="hidden" value="{{ $bli->kd_brg }}" readonly>
+                                        {{ $bli->kd_brg }}
+                                    </td>
+                                    <td>
+                                        <input name="nm_brg[]" class="form-control" type="hidden" value="{{ $bli->nm_brg }}" readonly>
+                                        {{ $bli->nm_brg }}
                                     </td>
                                     <td align="center">
-                                        <input name="qty_beli[]" class="form-control" type="hidden"
-                                            value="{{ $bli->qty_beli }}" readonly>
-                                        <input name="harga[]" class="form-control" type="hidden"
-                                            value="{{ $bli->harga }}" readonly>
-                                        {{ $bli->qty_beli }}</td>
-                                    <td width=10%><input name="jml_retur[]" class="form-control" type="number"
-                                            value="0"></td>
+                                        <input name="qty_beli[]" class="form-control" type="hidden" value="{{ $bli->qty_beli }}" readonly>
+                                        <input name="harga[]" class="form-control" type="hidden" value="{{ $bli->harga }}" readonly>
+                                        {{ $bli->qty_beli }}
+                                    </td>
+                                    <td width=10%>
+                                        <input name="jml_retur[]" class="form-control" type="number" value="0">
+                                    </td>
                                     <td align="center">
                                         <a href="/transaksi/hapus/{{ $bli->kd_brg }}"
                                             onclick="return confirm('Yakin Ingin menghapus data?')"
