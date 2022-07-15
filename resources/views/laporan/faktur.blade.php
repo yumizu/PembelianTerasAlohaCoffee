@@ -2,7 +2,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Teras Aloha Coffee Bogor</title>
+	<title>Form Permintaan Pembelian</title>
 	<style>
 	.invoice-box {
 		max-width: 800px;
