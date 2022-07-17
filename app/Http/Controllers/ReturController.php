@@ -116,25 +116,25 @@ public function simpan(Request $request)
                 $total += $harga[$key];
             }
 
-            //SIMPAN ke table jurnal bagian debet
-            $tambah_jurnaldebet=new \App\Jurnal;
-            $tambah_jurnaldebet->no_jurnal = $request->no_jurnal;
-            $tambah_jurnaldebet->keterangan = 'Kas';
-            $tambah_jurnaldebet->tgl_jurnal = $request->tgl;
-            $tambah_jurnaldebet->no_akun = $request->kas;
-            $tambah_jurnaldebet->debet = $total;
-            $tambah_jurnaldebet->kredit = '0';
-            $tambah_jurnaldebet->save();
+            // //SIMPAN ke table jurnal bagian debet
+            // $tambah_jurnaldebet=new \App\Jurnal;
+            // $tambah_jurnaldebet->no_jurnal = $request->no_jurnal;
+            // $tambah_jurnaldebet->keterangan = 'Kas';
+            // $tambah_jurnaldebet->tgl_jurnal = $request->tgl;
+            // $tambah_jurnaldebet->no_akun = $request->kas;
+            // $tambah_jurnaldebet->debet = $total;
+            // $tambah_jurnaldebet->kredit = '0';
+            // $tambah_jurnaldebet->save();
             
-            //SIMPAN ke table jurnal bagian kredit
-            $tambah_jurnalkredit=new \App\Jurnal;
-            $tambah_jurnalkredit->no_jurnal = $request->no_jurnal;
-            $tambah_jurnalkredit->keterangan = 'Retur Pembelian';
-            $tambah_jurnalkredit->tgl_jurnal = $request->tgl;
-            $tambah_jurnalkredit->no_akun = $request->retur;
-            $tambah_jurnalkredit->debet ='0';
-            $tambah_jurnalkredit->kredit = $total;
-            $tambah_jurnalkredit->save();
+            // //SIMPAN ke table jurnal bagian kredit
+            // $tambah_jurnalkredit=new \App\Jurnal;
+            // $tambah_jurnalkredit->no_jurnal = $request->no_jurnal;
+            // $tambah_jurnalkredit->keterangan = 'Retur Pembelian';
+            // $tambah_jurnalkredit->tgl_jurnal = $request->tgl;
+            // $tambah_jurnalkredit->no_akun = $request->retur;
+            // $tambah_jurnalkredit->debet ='0';
+            // $tambah_jurnalkredit->kredit = $total;
+            // $tambah_jurnalkredit->save();
 
             foreach($kdbrg as $key => $no)
             {
@@ -145,14 +145,14 @@ public function simpan(Request $request)
                 DetailRetur::insert($input);
                 $totalItemPrice=$harga[$key];
                 
-                DetailJurnal::create([
-                    'jurnal_id' => $tambah_jurnalkredit->id,
-                    'no_jurnal' => $request->no_jurnal,
-                    'kd_brg' => $kdbrg[$key],
-                    'nm_brg' => $nmbrg[$key],
-                    'qty' => $qtyretur[$key],
-                    'subtotal' => $totalItemPrice
-                ]);
+                // DetailJurnal::create([
+                //     'jurnal_id' => $tambah_jurnalkredit->id,
+                //     'no_jurnal' => $request->no_jurnal,
+                //     'kd_brg' => $kdbrg[$key],
+                //     'nm_brg' => $nmbrg[$key],
+                //     'qty' => $qtyretur[$key],
+                //     'subtotal' => $totalItemPrice
+                // ]);
             }
             //Simpan ke table retur
             $tambah_pembelian=new \App\Retur;
