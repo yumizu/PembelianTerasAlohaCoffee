@@ -47,7 +47,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center p-3" href="#">
                 <div class="sidebar-brand-icon rotate-n-0">
-                    <img src="{{asset('asset/img/logo_aloha.png')}}" width="100">
+                    <img src="{{asset('asset/img/logo_aloha_new.png')}}" width="100">
                 </div>
             </a>
             <div class="sidebar-brand sidebar-brand-text text-light mx-2 p-3">Teras Aloha Coffee Bogor</div>
