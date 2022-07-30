@@ -108,7 +108,7 @@
 						<tr>
 							<td> No : <strong>#{{ $noorder }}</strong>
 								<br> </td>
-							<td class="title"> <img src="asset/img/logo_aloha.png" width="80px"> </td>
+							<td class="title"> <img src="asset/img/logo_aloha_new.png" width="80px"> </td>
 						</tr>
 					</table>
 				</td>
