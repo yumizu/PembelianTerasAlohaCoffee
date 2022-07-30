@@ -89,15 +89,20 @@ public function simpan(Request $request)
         'no_retur' => 'required',
         'tgl' => 'required',
     ]);
+    $noBeli = $request->no_beli;
+    $containsOneRetur = false;
     if (count($request->jml_retur) > 0) {
         foreach($request->jml_retur as $jml) {
-            if ($jml == 0) {
-                return redirect()
-                    ->back()
-                    ->withInput($request->input())
-                    ->withErrors(['error' => 'Jumlah retur tidak boleh kosong']);
+            if ($jml > 0) {
+                $containsOneRetur = true;
             }
         }
+    }
+    if ($containsOneRetur == false) {
+        return redirect()
+            ->back()
+            ->withInput($request->input())
+            ->withErrors(['error' => 'Jumlah retur tidak boleh kosong']);
     }
     if (Retur::where('no_retur', $request->no_retur)->exists()) {
         Alert::warning('Pesan ','Retur sudah dilakukan ');
@@ -108,6 +113,7 @@ public function simpan(Request $request)
             //SIMPAN DATA KE TABEL DETAIL PEMBELIAN
             $kdbrg  = $request->kd_brg;
             $qtyretur = $request->jml_retur;
+            $qtyBeliStock = $request->qty_beli;
             $harga   = $request->harga;
             $nmbrg = $request->nm_brg;
             $total = 0;
@@ -136,23 +142,34 @@ public function simpan(Request $request)
             // $tambah_jurnalkredit->kredit = $total;
             // $tambah_jurnalkredit->save();
 
+            $totalItemZeroQty = 0;
             foreach($kdbrg as $key => $no)
             {
+                if ($qtyretur[$key] > $qtyBeliStock[$key]) {
+                    return redirect()
+                        ->back()
+                        ->withInput($request->input())
+                        ->withErrors(['error' => 'Jumlah retur tidak boleh melebihi jumlah barang yang dibeli']);
+                }
                 $input['no_retur']   = $request->no_retur;
                 $input['kd_brg']    = $kdbrg[$key];
                 $input['qty_retur']  = $qtyretur[$key];
                 $input['sub_retur']  = $harga[$key]*$qtyretur[$key];
                 DetailRetur::insert($input);
                 $totalItemPrice=$harga[$key];
+                $itemName = $nmbrg[$key];
+                DB::table('tampil_pembelian')
+                    ->where('no_beli', $noBeli)
+                    ->where('nm_brg', $itemName)
+                    ->decrement('qty_beli', $qtyretur[$key]);
+                $currentQty = DB::table('tampil_pembelian')
+                    ->where('no_beli', $noBeli)
+                    ->where('nm_brg', $itemName)
+                    ->first()->qty_beli;
+                if ($currentQty <= 0) {
+                    $totalItemZeroQty += 1;
+                } 
                 
-                // DetailJurnal::create([
-                //     'jurnal_id' => $tambah_jurnalkredit->id,
-                //     'no_jurnal' => $request->no_jurnal,
-                //     'kd_brg' => $kdbrg[$key],
-                //     'nm_brg' => $nmbrg[$key],
-                //     'qty' => $qtyretur[$key],
-                //     'subtotal' => $totalItemPrice
-                // ]);
             }
             //Simpan ke table retur
             $tambah_pembelian=new \App\Retur;
@@ -160,6 +177,17 @@ public function simpan(Request $request)
             $tambah_pembelian->tgl_retur = $request->tgl;
             $tambah_pembelian->total_retur = $total;
             $tambah_pembelian->save();
+
+            if ($totalItemZeroQty == count($request->nm_brg)) {
+                $pembelian = \App\Pembelian::where('no_beli', $noBeli)->first();
+                if($pembelian) {
+                    $detail = \App\DetailPembelian::where('no_beli', $pembelian->no_beli)->first();
+                    if($detail) {
+                        $detail->delete();
+                    }
+                    $pembelian->delete();
+                }
+            }
 
             DB::commit();
             Alert::success('Pesan ','Data berhasil disimpan');

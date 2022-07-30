@@ -40,6 +40,9 @@
                             <th>Aksi</th>
                         </tr>
                     </thead>
+                    @if(count($beli) > 0)
+                        <input name="no_beli" class="form-control" type="hidden" value="{{ $beli->first()->no_beli }}" readonly>
+                    @endif
                     <tbody>
                         @php($total = 0)
                             @foreach($beli as $bli)
