@@ -14,7 +14,7 @@ class DetailPesan extends Migration
     public function up()
     {
         Schema::create('detail_pesan', function (Blueprint $table){
-            $table->string('no_pesan',14);
+            $table->string('no_pesan',50);
             $table->string('kd_brg',5);
             $table->integer('qty_pesan');
             $table->integer('subtotal');

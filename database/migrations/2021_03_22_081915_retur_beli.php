@@ -14,7 +14,7 @@ class ReturBeli extends Migration
     public function up()
     {
         Schema::create('retur_beli', function (Blueprint $table){
-            $table->string('no_retur',14)->primary;
+            $table->string('no_retur',50)->primary;
             $table->date('tgl_retur');
             $table->integer('total_retur');
         });

@@ -14,7 +14,7 @@ class Pemesanan extends Migration
     public function up()
     {
         Schema::create('pemesanan', function (Blueprint $table){
-            $table->string('no_pesan',14)->primary;
+            $table->string('no_pesan',50)->primary;
             $table->date('tgl_pesan');
             $table->integer('total',11);
             $table->string('kd_supp',5);
