@@ -25,17 +25,24 @@
 			<tr>
 				<th>No Pemesanan</th>
 				<th>Tanggal</th>
+				<th>Detail Barang</th>
 				<th>Total</th>
 			</tr>
 		</thead>
 		<tbody> 
-			@foreach($data as $item)
+			@for ($i = 0; $i < count($data); $i++)
 				<tr>
-					<td>{{ $item->no_pesan }}</td>
-					<td>{{ $item->tgl_pesan }}</td>
-					<td>Rp{{ number_format($item->total) }}</td>
+					<td>{{ $data[$i]->no_pesan }}</td>
+					<td>{{ $data[$i]->tgl_pesan }}</td>
+					<td>
+						@foreach ($details[$i] as $detail)
+							- {{ $detail->nm_brg }} ({{ $detail->qty_pesan }}x Rp{{ number_format($detail->sub_total) }})<br>
+						@endforeach
+					</td>
+					<td>Rp{{ number_format($data[$i]->total) }}</td>
 				</tr>
-			@endforeach
+			@endfor
+			
 		</tbody>
 	</table>
 	<div class="total mb-4" align="right">

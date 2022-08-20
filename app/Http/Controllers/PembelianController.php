@@ -171,7 +171,11 @@ class PembelianController extends Controller
                 ->orderby('tgl_beli','ASC')
                 ->get();
         }
-        $pdf = PDF::loadView('laporan.print_pembelian', ['data' => $pesan, 'suffix_message' => $suffixMessage]);
+        // $details = array();
+        for ($i=0; $i < count($pesan); $i++) { 
+            $details[$i] = DB::table('tampil_pemesanan')->where('no_pesan', $pesan[$i]->no_pesan)->get()->toArray();
+        }
+        $pdf = PDF::loadView('laporan.print_pembelian', ['data' => $pesan, 'suffix_message' => $suffixMessage, 'details' => (array)$details]);
         return $pdf->stream();
     }
 
