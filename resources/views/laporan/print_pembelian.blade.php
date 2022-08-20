@@ -42,7 +42,7 @@
 							@php
 								$total += 1;
 							@endphp
-							{{$total}}. {{ $detail->nm_brg }} ({{ $detail->qty_pesan }}x Rp{{ number_format($detail->sub_total) }})<br>
+							{{$total}}. {{ $detail->nm_brg }} ({{ $detail->qty_pesan }} x Rp{{ number_format($detail->sub_total) }})<br>
 						@endforeach
 					</td>
 					<td>Rp{{ number_format($data[$i]->total) }}</td>
