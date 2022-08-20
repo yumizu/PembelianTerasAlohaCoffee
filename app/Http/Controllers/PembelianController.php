@@ -16,6 +16,7 @@ use App\DetailJurnal;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use PDF;
 use Pemesanan;
+use Carbon\Carbon;
 
 class PembelianController extends Controller
 {
@@ -140,21 +141,37 @@ class PembelianController extends Controller
 
     public function reportPDF(Request $request)
     {
-        // dd($request->all());
         $periode = $request->periode;
         $pesan = [];
+        $suffixMessage = "";
         if ($periode == "All") {
             $pesan = DB::select('SELECT * FROM pemesanan where not exists (select * from pembelian where pemesanan.no_pesan=pembelian.no_pesan)');
+            $suffixMessage = "Seluruh Periode";
         } else {
             $firstDate = $request->tglawal;
             $secondDate = $request->tglakhir;
+
+            $start_date = Carbon::createFromFormat('Y-m-d', $firstDate);
+            $end_date = Carbon::createFromFormat('Y-m-d', $secondDate);
+            $days = $start_date->diffInDays($end_date)+1;
+
+            if ($days < 7) {
+                $suffixMessage = "Harian";
+            } 
+            if ($days >= 7 && $days <= 30) {
+                $suffixMessage = "Mingguan";
+            }
+            if ($days > 30) {
+                $suffixMessage = "Bulanan";
+            }
+
             $pesan = DB::table('pembelian')
                 ->join('pemesanan', 'pembelian.no_pesan', '=', 'pemesanan.no_pesan')
                 ->whereBetween('tgl_beli', [$firstDate, $secondDate])
                 ->orderby('tgl_beli','ASC')
                 ->get();
         }
-        $pdf = PDF::loadView('laporan.print_pembelian', ['data' => $pesan]);
+        $pdf = PDF::loadView('laporan.print_pembelian', ['data' => $pesan, 'suffix_message' => $suffixMessage]);
         return $pdf->stream();
     }
 
