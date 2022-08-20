@@ -42,10 +42,10 @@
 							@php
 								$total += 1;
 							@endphp
-							{{$total}}. {{ $detail->nm_brg }} ({{ $detail->qty_pesan }} x Rp {{ number_format($detail->sub_total) }})<br>
+							{{$total}}. {{ $detail->nm_brg }} ({{ $detail->qty_pesan }} x {{ number_format($detail->sub_total) }})<br>
 						@endforeach
 					</td>
-					<td>Rp {{ number_format($data[$i]->total) }}</td>
+					<td>{{ number_format($data[$i]->total) }}</td>
 				</tr>
 			@endfor
 			
@@ -58,7 +58,7 @@
 				$total += $item->total;
 			}
 		@endphp
-		<b>Total Harga: Rp {{ number_format($total) }}</b>
+		<b>Total Harga: {{ number_format($total) }}</b>
 	</div>
 	<div align="right">
 		<h6>Tanda Tangan</h6>
