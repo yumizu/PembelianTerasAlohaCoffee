@@ -35,8 +35,14 @@
 					<td>{{ $data[$i]->no_pesan }}</td>
 					<td>{{ $data[$i]->tgl_pesan }}</td>
 					<td>
+						@php
+							$total = 0
+						@endphp
 						@foreach ($details[$i] as $detail)
-							- {{ $detail->nm_brg }} ({{ $detail->qty_pesan }}x Rp{{ number_format($detail->sub_total) }})<br>
+							@php
+								$total += 1;
+							@endphp
+							{{$total}}. {{ $detail->nm_brg }} ({{ $detail->qty_pesan }}x Rp{{ number_format($detail->sub_total) }})<br>
 						@endforeach
 					</td>
 					<td>Rp{{ number_format($data[$i]->total) }}</td>
